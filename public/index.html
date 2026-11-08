@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shimon · Project Hub</title>
+    <meta name="description" content="Live products, real-time status and what's launching next: the home of every project Shimon builds." />
+    <meta name="theme-color" content="#06070b" />
+    <meta property="og:title" content="Shimon · Project Hub" />
+    <meta property="og:description" content="Live products, real-time status and what's launching next." />
+    <meta property="og:image" content="assets/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link id="favicon" rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="Project Hub home">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa" /><stop offset=".5" stop-color="#22d3ee" /><stop offset="1" stop-color="#f472b6" /></linearGradient></defs><rect x="1.5" y="1.5" width="29" height="29" rx="9" fill="none" stroke="url(#lg)" stroke-width="2" /><path d="M10 20.5c1.2 1.4 3.2 2.2 5.6 2.2 3 0 5-1.5 5-3.8 0-2.3-1.8-3.2-4.8-3.8-2.6-.5-3.7-1-3.7-2.2 0-1.1 1.1-1.9 2.9-1.9 1.6 0 2.9.6 3.8 1.6" fill="none" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round" /></svg>
+        <span>Shimon<em>/hub</em></span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#projects">Projects</a>
+        <a href="#status">Live status</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#next">Up next</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="sys-pill" id="sysPill"><i class="dot"></i><span>Checking systems…</span></span>
+        <a class="icon-btn" href="https://www.linkedin.com/in/shimonr/" target="_blank" rel="noopener" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" class="gh"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" /></svg></a>
+        <a class="icon-btn" href="https://github.com/shimonr" target="_blank" rel="noopener" aria-label="GitHub profile" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" class="gh"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z" /></svg></a>
+        <button class="kbd-btn" id="openPalette" aria-label="Open command palette"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg><kbd>⌘K</kbd></button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="eyebrow reveal"><span class="pulse"></span> Project Hub · <span id="heroClock">live</span></div>
+        <h1 class="reveal">
+          I build products<br />
+          that people <span class="rotator" id="rotator"><span>love</span></span> <em>to use.</em>
+        </h1>
+        <p class="lead reveal">One place to explore, open and monitor everything I'm building: live production apps, real-time health checks, and the next ideas on their way to launch.</p>
+        <div class="cta reveal">
+          <a class="btn btn-primary magnetic" href="#projects"><span>Explore projects</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+          <a class="btn btn-ghost magnetic" href="#status"><i class="dot live"></i><span>Live status</span></a>
+        </div>
+        <dl class="counters reveal" id="counters">
+          <div><dt>Live products</dt><dd data-count="0" id="cLive">0</dd></div>
+          <div><dt>In the pipeline</dt><dd data-count="0" id="cNext">0</dd></div>
+          <div><dt>Commits shipped</dt><dd id="cCommits">—</dd></div>
+          <div><dt>Automated tests</dt><dd data-count="151">0</dd></div>
+          <div><dt>Uptime · 24h</dt><dd id="cUptime">—</dd></div>
+        </dl>
+        <a class="scroll-hint" href="#projects" aria-label="Scroll to projects"><span></span></a>
+      </section>
+
+      <section class="marquee" aria-label="Technologies">
+        <div class="marquee-track" id="marquee"></div>
+      </section>
+
+      <section id="projects" class="section">
+        <header class="section-head reveal">
+          <span class="kicker">01 · Live in production</span>
+          <h2>Shipped, hosted and <em>running right now.</em></h2>
+          <p>Self-hosted on Oracle Cloud with separate production and QA environments, automatic HTTPS and nightly backups.</p>
+        </header>
+        <div id="featured" class="featured"></div>
+      </section>
+
+      <section id="status" class="section">
+        <header class="section-head reveal">
+          <span class="kicker">02 · Live monitor</span>
+          <h2>Every environment, <em>checked every minute.</em></h2>
+          <p>Health endpoints are polled by the hub's own monitor. Bars show the last 24 hours in 30-minute slices; hover them for detail.</p>
+        </header>
+        <div class="status-bar reveal">
+          <div class="overall" id="overall"><i class="dot"></i><div><strong>Checking…</strong><span>Contacting services</span></div></div>
+          <div class="status-meta">
+            <span id="lastChecked">—</span>
+            <button class="ring-btn" id="refreshNow" aria-label="Refresh status now">
+              <svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="track" /><circle cx="18" cy="18" r="15" class="ring" id="ring" /></svg>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" /></svg>
+            </button>
+          </div>
+        </div>
+        <div id="services" class="services"></div>
+      </section>
+
+      <section id="pipeline" class="section">
+        <header class="section-head reveal">
+          <span class="kicker">03 · Launch pipeline</span>
+          <h2>From first sketch <em>to production.</em></h2>
+          <p>Every project moves through the same five stages. Here's where each one stands today.</p>
+        </header>
+        <div id="pipelineBoard" class="pipeline reveal"></div>
+      </section>
+
+      <section id="next" class="section">
+        <header class="section-head reveal">
+          <span class="kicker">04 · Up next</span>
+          <h2>On the launchpad, <em>coming soon.</em></h2>
+          <p>The next products in the works. They'll join the live monitor the day they ship.</p>
+        </header>
+        <div id="upcoming" class="upcoming"></div>
+      </section>
+
+      <section class="section closing reveal">
+        <div class="closing-card">
+          <h2>More is <em>always</em> on the way.</h2>
+          <p>Follow along on GitHub to see each project evolve commit by commit, or say hello on LinkedIn.</p>
+          <div class="cta">
+            <a class="btn btn-primary magnetic" id="githubCta" href="https://github.com/shimonr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="gh"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z" /></svg><span>github.com/shimonr</span></a>
+            <a class="btn btn-ghost magnetic" href="https://www.linkedin.com/in/shimonr/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="gh"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" /></svg><span>Connect on LinkedIn</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Shimon · Project Hub</span>
+      <span class="footer-links"><a href="https://www.linkedin.com/in/shimonr/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/shimonr" target="_blank" rel="noopener">GitHub</a></span>
+      <span class="footer-hint">Press <kbd>⌘K</kbd> to jump anywhere · try the Konami code 🚀</span>
+    </footer>
+
+    <div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+      <div class="palette-box">
+        <div class="palette-input"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg><input id="paletteInput" placeholder="Jump to a project, environment or section…" autocomplete="off" /><kbd>esc</kbd></div>
+        <ul id="paletteList" role="listbox"></ul>
+      </div>
+    </div>
+    <div class="tooltip" id="tooltip" role="tooltip"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

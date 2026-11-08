@@ -1,0 +1,130 @@
+{
+  "owner": {
+    "name": "Shimon",
+    "github": "https://github.com/shimonr",
+    "linkedin": "https://www.linkedin.com/in/shimonr/"
+  },
+  "stages": ["Concept", "Prototype", "Build", "Beta", "Live"],
+  "projects": [
+    {
+      "id": "tasker",
+      "name": "Tasker",
+      "subtitle": "Family Task Adventure",
+      "emoji": "🎈",
+      "stage": 4,
+      "accent": ["#a855f7", "#ec4899"],
+      "tagline": "Turns household chores into a game kids actually want to play.",
+      "description": "A delightfully playful, production-grade family app. Parents hand out missions, kids tap “I did it!” to a burst of confetti and collect stars, and daily streaks keep the momentum going. Behind the candy-coloured interface sits serious engineering: role-based security, rate limiting, hashed credentials and 100% test coverage enforced in CI on both frontend and backend.",
+      "features": [
+        "One-time, repeating and taking-turns chores with automatic rotation",
+        "Stars, daily streaks and a family leaderboard",
+        "Mobile-first and installable as an app (PWA)",
+        "Email notifications for new tasks, turns and completions",
+        "Three roles: admin, parent and child"
+      ],
+      "stats": [
+        { "label": "Automated tests", "value": 151 },
+        { "label": "Test coverage", "value": 100, "suffix": "%" },
+        { "label": "API endpoints", "value": 25, "prefix": "~" },
+        { "label": "User roles", "value": 3 }
+      ],
+      "stack": ["React", "TypeScript", "FastAPI", "PostgreSQL", "Tailwind", "Docker"],
+      "screenshot": "assets/tasker.webp",
+      "links": [
+        { "label": "Open app", "url": "https://tasker.129.159.8.242.sslip.io", "primary": true },
+        { "label": "QA", "url": "https://qa.tasker.129.159.8.242.sslip.io" },
+        { "label": "Source", "url": "https://github.com/shimonr/tasker" }
+      ],
+      "repo": "shimonr/tasker",
+      "environments": [
+        { "name": "Production", "url": "https://tasker.129.159.8.242.sslip.io", "health": "https://tasker.129.159.8.242.sslip.io/api/health" },
+        { "name": "QA", "url": "https://qa.tasker.129.159.8.242.sslip.io", "health": "https://qa.tasker.129.159.8.242.sslip.io/api/health" }
+      ]
+    },
+    {
+      "id": "yogadb",
+      "name": "Yoga DB",
+      "subtitle": "Asanas, flows & games",
+      "emoji": "🪷",
+      "stage": 4,
+      "accent": ["#10b981", "#8b5cf6"],
+      "tagline": "A beautifully curated yoga encyclopedia that teaches while it delights.",
+      "description": "An elegant full-stack library of hand-curated asanas, each with photography, Sanskrit and English names, difficulty and benefits, woven together through transitions, flows and classes. Learning games turn Sanskrit memorisation into play, and community ratings surface the poses people love most. Backed by automated off-site backups and a separate QA environment.",
+      "features": [
+        "Every pose photographed, with Sanskrit and English names",
+        "Transitions, flows and full classes built from poses",
+        "Four learning games: match poses and master Sanskrit",
+        "Community ratings and pose rankings",
+        "Nightly and off-site database backups"
+      ],
+      "stats": [
+        { "label": "Asanas", "metric": "asanas" },
+        { "label": "Pose families", "metric": "families" },
+        { "label": "Focus areas", "metric": "focus" },
+        { "label": "Learning games", "value": 4 }
+      ],
+      "metrics": [
+        { "key": "asanas", "url": "https://yogadb.129-159-8-242.sslip.io/api/asanas?limit=200", "op": "count", "fallback": 105 },
+        { "key": "families", "url": "https://yogadb.129-159-8-242.sslip.io/api/asanas?limit=200", "op": "unique", "field": "type", "fallback": 15 },
+        { "key": "focus", "url": "https://yogadb.129-159-8-242.sslip.io/api/asanas?limit=200", "op": "unique", "field": "category", "fallback": 12 }
+      ],
+      "stack": ["React 18", "TypeScript", "FastAPI", "PostgreSQL", "Alembic", "Docker"],
+      "screenshot": "assets/yogadb.webp",
+      "links": [
+        { "label": "Open app", "url": "https://yogadb.129-159-8-242.sslip.io", "primary": true },
+        { "label": "QA", "url": "https://qa.yogadb.129-159-8-242.sslip.io" },
+        { "label": "Source", "url": "https://github.com/shimonr/YogaDB" }
+      ],
+      "repo": "shimonr/YogaDB",
+      "environments": [
+        { "name": "Production", "url": "https://yogadb.129-159-8-242.sslip.io", "health": "https://yogadb.129-159-8-242.sslip.io/api/health" },
+        { "name": "QA", "url": "https://qa.yogadb.129-159-8-242.sslip.io", "health": "https://qa.yogadb.129-159-8-242.sslip.io/api/health" }
+      ]
+    },
+    {
+      "id": "rocket-builder-tycoon",
+      "name": "Rocket Builder Tycoon",
+      "subtitle": "A Roblox tycoon game",
+      "emoji": "🚀",
+      "stage": 1,
+      "accent": ["#f97316", "#facc15"],
+      "tagline": "Design it. Launch it. Upgrade it. Repeat until orbit.",
+      "description": "A Roblox tycoon where players assemble rockets from interchangeable parts, launch them in a blaze of visual effects and reinvest the earnings in ever-better hardware. A tight engineering-meets-economy loop, already covered by its own test suites.",
+      "features": [
+        "Modular rockets: nose cones, bodies, fuel tanks, engines and fins",
+        "Launch sequences with visual effects",
+        "Earnings scale with rocket quality",
+        "Shop and progression system"
+      ],
+      "stats": [
+        { "label": "Rocket parts", "value": 25 },
+        { "label": "Part modules", "value": 5 },
+        { "label": "Test suites", "value": 4 }
+      ],
+      "stack": ["Luau", "Roblox", "Rojo"],
+      "links": [{ "label": "Source", "url": "https://github.com/shimonr/rocket-builder-tycoon" }],
+      "repo": "shimonr/rocket-builder-tycoon",
+      "environments": []
+    },
+    {
+      "id": "spotify-to-chords",
+      "name": "Spotify to Chords",
+      "subtitle": "Play along with anything",
+      "emoji": "🎸",
+      "stage": 0,
+      "accent": ["#22c55e", "#06b6d4"],
+      "tagline": "Press play on Spotify, pick up your guitar, and the chords are already there.",
+      "description": "A music companion that will follow the song you're listening to on Spotify and show its chords in sync, so any track in your library becomes something you can play along with.",
+      "features": [
+        "Connect Spotify and follow the song that's playing",
+        "Chord charts that scroll in time with the music",
+        "Transpose and capo helpers",
+        "Save favourites to a personal songbook"
+      ],
+      "stats": [],
+      "stack": ["Spotify API", "Web Audio"],
+      "links": [],
+      "environments": []
+    }
+  ]
+}

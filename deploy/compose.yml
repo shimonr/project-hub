@@ -1,0 +1,21 @@
+# Runs the hub behind the shared caddy-docker-proxy on the Oracle server.
+# The proxy watches the external `web` network and issues HTTPS automatically.
+name: hub
+services:
+  hub:
+    build: ..
+    restart: unless-stopped
+    volumes:
+      - hub-data:/data
+    networks: [web]
+    labels:
+      caddy: ${HUB_HOST:-hub.129-159-8-242.sslip.io}
+      caddy.reverse_proxy: '{{upstreams 8080}}'
+      caddy.encode: zstd gzip
+
+volumes:
+  hub-data:
+
+networks:
+  web:
+    external: true
