@@ -109,22 +109,34 @@
     {
       "id": "spotify-to-chords",
       "name": "Spotify to Chords",
-      "subtitle": "Play along with anything",
+      "subtitle": "Playlist → guitar songbook",
       "emoji": "🎸",
-      "stage": 0,
+      "stage": 4,
       "accent": ["#22c55e", "#06b6d4"],
-      "tagline": "Press play on Spotify, pick up your guitar, and the chords are already there.",
-      "description": "A music companion that will follow the song you're listening to on Spotify and show its chords in sync, so any track in your library becomes something you can play along with.",
+      "tagline": "Turn any Spotify playlist into a printable guitar songbook.",
+      "description": "Sign in with Spotify, pick a playlist or your Liked Songs, and Songbook finds the chords for every track: first in a shared chord library, then across 17 chord sites, keeping the best match per song. The result is a PDF songbook with a clickable index and one song per page, with transposition, version choices and a list of anything still missing. Each visitor's data stays private, with invite-based Spotify access and 100% test coverage enforced in CI.",
       "features": [
-        "Connect Spotify and follow the song that's playing",
-        "Chord charts that scroll in time with the music",
-        "Transpose and capo helpers",
-        "Save favourites to a personal songbook"
+        "Per-user Spotify sign-in for playlists and Liked Songs",
+        "Chord search across a shared library and many chord sites",
+        "Printable PDF songbook with index, one song per page",
+        "Transpose, pick between versions, ban bad tabs",
+        "CSV upload works without signing in"
       ],
-      "stats": [],
-      "stack": ["Spotify API", "Web Audio"],
-      "links": [],
-      "environments": []
+      "stats": [
+        { "label": "Automated tests", "value": 779 },
+        { "label": "Test coverage", "value": 100, "suffix": "%" },
+        { "label": "Chord sites", "value": 17 }
+      ],
+      "stack": ["Python", "Flask", "Spotify API", "ReportLab", "SQLite", "Docker"],
+      "screenshot": "assets/spotify-to-chords.webp",
+      "links": [
+        { "label": "Open app", "url": "https://chords.129-159-8-242.sslip.io", "primary": true },
+        { "label": "Source", "url": "https://github.com/shimonr/spotify-to-chords" }
+      ],
+      "repo": "shimonr/spotify-to-chords",
+      "environments": [
+        { "name": "Production", "url": "https://chords.129-159-8-242.sslip.io", "health": "https://chords.129-159-8-242.sslip.io/api/health" }
+      ]
     }
   ]
 }
