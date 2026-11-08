@@ -30,9 +30,13 @@ cd "$(dirname "$0")/.."
 echo "Uploading to $ORACLE_USER@$ORACLE_HOST:$APP_DIR"
 tar -czf - server.mjs Dockerfile .dockerignore public deploy/compose.yml | remote "
   set -e
-  sudo mkdir -p $APP_DIR && sudo chown \$(id -u):\$(id -g) $APP_DIR
-  rm -rf $APP_DIR.new && mkdir $APP_DIR.new && tar -xzf - -C $APP_DIR.new
-  rm -rf $APP_DIR.old && mv $APP_DIR $APP_DIR.old && mv $APP_DIR.new $APP_DIR && rm -rf $APP_DIR.old
+  staging=\$(mktemp -d)
+  tar -xzf - -C \"\$staging\"
+  chmod 755 \"\$staging\"
+  sudo rm -rf $APP_DIR.old
+  if [ -d $APP_DIR ]; then sudo mv $APP_DIR $APP_DIR.old; fi
+  sudo mv \"\$staging\" $APP_DIR
+  sudo rm -rf $APP_DIR.old
 "
 echo "Building and starting the container"
 remote "cd $APP_DIR/deploy && HUB_HOST='$HUB_HOST' docker compose up -d --build --remove-orphans && docker image prune -f >/dev/null"
