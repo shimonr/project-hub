@@ -1,0 +1,6 @@
+services:
+  hub:
+    command: node server.mjs
+    health: /healthz
+    portal:
+      title: Project Hub

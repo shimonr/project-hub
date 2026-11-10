@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Prepares an Amp orb. The hub has no dependencies or build step, so this only
+# checks that the base image provides what server.mjs and deploy/deploy.sh need.
+set -euo pipefail
+
+node_major=$(node -p 'process.versions.node.split(".")[0]')
+if [ "$node_major" -lt 20 ]; then
+  echo "server.mjs needs Node 20+, found $(node --version)" >&2
+  exit 1
+fi
+
+for tool in ssh ssh-keyscan curl tar; do
+  command -v "$tool" >/dev/null || { echo "missing $tool, needed by deploy/deploy.sh" >&2; exit 1; }
+done
+
+echo "Node $(node --version) and deploy tools are ready"
