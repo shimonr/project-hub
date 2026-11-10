@@ -5,6 +5,8 @@ services:
   hub:
     build: ..
     restart: unless-stopped
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
     volumes:
       - hub-data:/data
     networks: [web]

@@ -27,4 +27,5 @@ jobs:
           ORACLE_SSH_KEY: ${{ secrets.ORACLE_SSH_KEY }}
           ORACLE_KNOWN_HOSTS: ${{ secrets.ORACLE_KNOWN_HOSTS }}
           HUB_HOST: ${{ vars.HUB_HOST }}
+          GITHUB_TOKEN: ${{ secrets.HUB_GITHUB_TOKEN }}
         run: ./deploy/deploy.sh

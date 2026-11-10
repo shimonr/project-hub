@@ -44,5 +44,6 @@ ORACLE_HOST=129.159.8.242 ORACLE_SSH_KEY="$(cat ~/.ssh/hub_deploy)" ./deploy/dep
 | `ORACLE_USER` | `ubuntu` |
 | `ORACLE_SSH_KEY` | a private key whose public half is in the server's `~/.ssh/authorized_keys` |
 | `ORACLE_KNOWN_HOSTS` | optional: output of `ssh-keyscan 129.159.8.242`, to pin the server's identity |
+| `HUB_GITHUB_TOKEN` | optional: a fine-grained GitHub token with read-only Contents, passed to the hub as `GITHUB_TOKEN` for GitHub stats |
 
 Optionally set the repository variable `HUB_HOST` to serve the hub on another hostname.

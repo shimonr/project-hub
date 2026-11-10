@@ -5,6 +5,7 @@
 #   ORACLE_USER         SSH user (default: ubuntu)
 #   ORACLE_KNOWN_HOSTS  pinned known_hosts line(s); scanned on the fly when empty
 #   HUB_HOST            public hostname (default: hub.129-159-8-242.sslip.io)
+#   GITHUB_TOKEN        optional: token the hub uses for GitHub stats (private repos, higher rate limit)
 set -euo pipefail
 
 : "${ORACLE_HOST:?ORACLE_HOST is required}" "${ORACLE_SSH_KEY:?ORACLE_SSH_KEY is required}"
@@ -39,7 +40,9 @@ tar -czf - server.mjs Dockerfile .dockerignore public deploy/compose.yml | remot
   sudo rm -rf $APP_DIR.old
 "
 echo "Building and starting the container"
-remote "cd $APP_DIR/deploy && HUB_HOST='$HUB_HOST' docker compose up -d --build --remove-orphans && docker image prune -f >/dev/null"
+# The token goes over stdin so it never appears in a command line.
+printf '%s\n' "${GITHUB_TOKEN:-}" | remote "IFS= read -r GITHUB_TOKEN && export GITHUB_TOKEN &&
+  cd $APP_DIR/deploy && HUB_HOST='$HUB_HOST' docker compose up -d --build --remove-orphans && docker image prune -f >/dev/null"
 
 echo "Waiting for https://$HUB_HOST"
 for _ in $(seq 1 30); do
