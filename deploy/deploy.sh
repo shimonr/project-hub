@@ -4,13 +4,13 @@
 #   ORACLE_SSH_KEY      private key that can SSH in (required)
 #   ORACLE_USER         SSH user (default: ubuntu)
 #   ORACLE_KNOWN_HOSTS  pinned known_hosts line(s); scanned on the fly when empty
-#   HUB_HOST            public hostname (default: hub.129-159-8-242.sslip.io)
+#   HUB_HOST            public hostname (default: shimonr.com)
 #   GITHUB_TOKEN        optional: token the hub uses for GitHub stats (private repos, higher rate limit)
 set -euo pipefail
 
 : "${ORACLE_HOST:?ORACLE_HOST is required}" "${ORACLE_SSH_KEY:?ORACLE_SSH_KEY is required}"
 ORACLE_USER=${ORACLE_USER:-ubuntu}
-HUB_HOST=${HUB_HOST:-hub.129-159-8-242.sslip.io}
+HUB_HOST=${HUB_HOST:-shimonr.com}
 APP_DIR=/opt/apps/hub
 
 tmp=$(mktemp -d)
