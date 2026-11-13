@@ -9,9 +9,12 @@ services:
       - hub-data:/data
     networks: [web]
     labels:
-      caddy: ${HUB_HOST:-hub.129-159-8-242.sslip.io}
-      caddy.reverse_proxy: '{{upstreams 8080}}'
-      caddy.encode: zstd gzip
+      caddy_0: ${HUB_HOST:-shimonr.com}
+      caddy_0.reverse_proxy: '{{upstreams 8080}}'
+      caddy_0.encode: zstd gzip
+      # www and the old sslip.io address redirect to the main domain
+      caddy_1: www.${HUB_HOST:-shimonr.com} hub.129-159-8-242.sslip.io
+      caddy_1.redir: https://${HUB_HOST:-shimonr.com}{uri} permanent
 
 volumes:
   hub-data:

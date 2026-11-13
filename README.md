@@ -30,6 +30,8 @@ Edit `public/projects.json`:
 
 `deploy/deploy.sh` uploads the site to `/opt/apps/hub` over SSH and starts it with Docker Compose. The server's shared `caddy-docker-proxy` picks up the container from its labels and issues HTTPS. Don't restart `proxy-caddy-1`, because every site goes through it.
 
+The site is served at https://shimonr.com. `www.shimonr.com` and the old `hub.129-159-8-242.sslip.io` address redirect there. DNS is on Cloudflare: `A` records for `shimonr.com` and `www` point at `129.159.8.242`, set to "DNS only" so Caddy can issue the certificates.
+
 ```bash
 ORACLE_HOST=129.159.8.242 ORACLE_SSH_KEY="$(cat ~/.ssh/hub_deploy)" ./deploy/deploy.sh
 ```
