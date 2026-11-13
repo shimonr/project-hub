@@ -130,12 +130,12 @@
       "stack": ["Python", "Flask", "Spotify API", "ReportLab", "SQLite", "Docker"],
       "screenshot": "assets/spotify-to-chords.webp",
       "links": [
-        { "label": "Open app", "url": "https://chords.129-159-8-242.sslip.io", "primary": true },
+        { "label": "Open app", "url": "https://shimonr.com/spotify2chords", "primary": true },
         { "label": "Source", "url": "https://github.com/shimonr/spotify-to-chords" }
       ],
       "repo": "shimonr/spotify-to-chords",
       "environments": [
-        { "name": "Production", "url": "https://chords.129-159-8-242.sslip.io", "health": "https://chords.129-159-8-242.sslip.io/api/health" }
+        { "name": "Production", "url": "https://shimonr.com/spotify2chords", "health": "https://shimonr.com/spotify2chords/api/health" }
       ]
     }
   ]
