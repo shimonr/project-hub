@@ -23,8 +23,10 @@ function timeAgo(ts) {
   if (d < 60) return `${d} days ago`
   return `${Math.round(d / 30)} months ago`
 }
+// Host plus path, since several apps share shimonr.com under different paths.
 function host(url) {
-  return new URL(url).host
+  const u = new URL(url)
+  return (u.host + u.pathname).replace(/\/$/, '')
 }
 function toast(msg) {
   const t = $('#toast')
@@ -623,6 +625,7 @@ async function boot() {
   const n = config.stages.length
   $('#cLive').dataset.count = config.projects.filter((p) => p.stage === n - 1).length
   $('#cNext').dataset.count = config.projects.filter((p) => p.stage < n - 1).length
+  $('#cTests').dataset.count = config.projects.flatMap((p) => p.stats).filter((s) => s.label === 'Automated tests').reduce((sum, s) => sum + s.value, 0)
   renderMarquee()
   renderFeatured()
   renderPipeline()
