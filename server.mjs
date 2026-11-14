@@ -237,11 +237,13 @@ try {
 
 server.listen(PORT, () => console.log(`project hub listening on :${PORT}`))
 
-const every = (fn, ms) => {
+const every = (fn, ms, firstDelayMs = 0) => {
   const run = () => fn().catch((err) => console.error(err))
-  run()
+  setTimeout(run, firstDelayMs)
   setInterval(run, ms).unref()
 }
-every(runChecks, CHECK_MS)
+// Starting this container makes the shared proxy reload, so the first checks
+// would record a few seconds of false downtime for every app.
+every(runChecks, CHECK_MS, 20000)
 every(collectMetrics, METRICS_MS)
 every(collectGithub, GITHUB_MS)
